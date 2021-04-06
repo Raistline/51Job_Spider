@@ -395,37 +395,6 @@ class JobSpider:
         plt.savefig(os.path.join('images', "Histogram_of_Post.jpg"))
         plt.show()
 
-    @staticmethod
-    def insert_into_db():
-        """
-        插入数据到数据库
-        create table jobpost(
-            j_salary float(3, 1),
-            j_locate text,
-            j_post text
-        );
-        """
-        conn = pymysql.connect(
-            host="localhost",
-            port=3306,
-            user="root",
-            passwd="0303",
-            db="chenx",
-            charset="utf8",
-        )
-        cur = conn.cursor()
-        with open(os.path.join("data", "post_salary.csv"), "r", encoding="utf-8") as f:
-            f_csv = csv.reader(f)
-            sql = "insert into jobpost(j_salary, j_locate, j_post) values(%s, %s, %s)"
-            for row in f_csv:
-                value = (row[0], row[1], row[2])
-                try:
-                    cur.execute(sql, value)
-                    conn.commit()
-                except Exception as e:
-                    logger.error(e)
-        cur.close()
-
     def execute_more_tasks(self, target):
         """
         协程池接收请求任务,可以扩展把解析,存储耗时操作加入各自队列,效率最大化
@@ -454,7 +423,6 @@ if __name__ == "__main__":
     # spider.post_counter()
     # spider.post_salary_locate()
     # spider.post_salary()
-    # # # spider.insert_into_db()
     # spider.post_salary_counter()
     # spider.post_desc_counter()
     # spider.world_cloud()
