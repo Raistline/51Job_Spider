@@ -427,4 +427,4 @@ if __name__ == "__main__":
     # spider.post_desc_counter()
     # spider.world_cloud()
     # spider.pie_of_salary()                          # 绘制工资-人数折线图
-    spider.histogram_of_post()
+    spider.histogram_of_post()                        # 绘制工作-人数水平柱状图
